@@ -1,0 +1,12 @@
+<!-- サクセスメッセージ -->
+<p id="notice">
+	<%= notice %>
+</p>
+
+<p><strong>title:</strong><%= @list.title %></p>
+<p><strong>body:</strong><%= @list.body %></p>
+
+<!-- 未定 -->
+<%=link_to "Edit",edit_book_path(@list) %>
+|
+<%=link_to "Back",books_path %>
