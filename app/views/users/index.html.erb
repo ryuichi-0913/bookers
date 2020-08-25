@@ -1,64 +1,50 @@
 <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <nav class="nav navbar-nav navbar-left">
-      <span>Bookers</span>
-    </nav>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a class="glyphicon glyphicon-home home" href="/books"> Home</a></li>
-          <li><a class="glyphicon glyphicon-user users" href="/users"> Users</a></li>
-          <li><a class="glyphicon glyphicon-book books" href="/books"> Books</a></li>
-          <li><a class="glyphicon glyphicon-log-out logout" rel="nofollow" data-method="delete" href="/users/sign_out"> logout</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-  	<div class="body">
+  <div class="body">
       <div class="container">
+        <p id="notice">Signed in successfully.</p>
+      <div class="row">
+      <div class="col-xs-3">
 
-        <p id="notice"></p>
-
-
-      	<div class="row">
-  
-  <div class="col-xs-3">
+<!-- ユーザーインフォ領域 -->
     <h2>User info</h2>
-    <img class="attachment user profile_image" src="/attachments/b54919ad28345c7334c2558f2ab36918e7a3911a/store/fill/100/100/93a4cdf76d1778a1942ce94975b15ce2720b8411c3f69a5721f4b97e8fc8/profile_image" alt="Profile image"><table class="table">
-      <tbody><tr></tr> 
-      <tr>
-    	  <th>name</th>
-    	  <th>aa</th>
-      </tr>
-      <tr>
-    	  <th>introduction</th>
-    	  <th>aa</th>
-      </tr>
-</tbody></table>
-
-<div class="row">
-  <a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_23240" href="/users/23240/edit"></a>
-</div>
-
+     <%= attachment_image_tag @user, :image, size: '30x30',　format: 'jpeg', fallback: "no_image.jpg" %>
+        <table class="table">
+          <tbody><tr></tr> 
+                 <tr>
+                  <th>name</th>
+                  <th><%= @user.name %></th>
+                 </tr>
+                 <tr>
+                  <th>introduction</th>
+                  <th><%= @user.introduction %></th>
+                </tr>
+          </tbody>
+        </table>
+      <div class="row">
+        　<% if @user.id == current_user.id %>
+             <p><%= link_to "", edit_user_path(@user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user" %></p>
+            <% end %>
+      </div>
+<!-- ブック編集領域 -->
     <h2>New book</h2>
-    <form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="b5++7wCGX2jVxRENhtUlwhcQIG2sZ6MYpaVnX+IWo58PMBUOEpudnAas99JRS241iTU6aOUar4V+ulEy1RXI+Q==">
-  <div class="field row">
-    <label for="book_title">Title</label>
-    <input class="col-xs-12 book_title" type="text" name="book[title]" id="book_title">
-  </div>
+      <form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="kdjtc3jSZSBZcUuae5lEf1FshNbVhgCM4mA5JRAeDcT1lJ82SvzIi1p4M9nteYivIPzpsgOJsb1OcuNgs38NKg==">
 
-  <div class="field row">
-    <label for="book_opinion">Opinion</label>
-    <textarea class="col-xs-12 book_body" name="book[body]" id="book_body"></textarea>
-  </div>
+    <div class="field row">
+        <label for="book_title">Title</label>
+        <input class="col-xs-12 book_title" type="text" name="book[title]" id="book_title">
+      </div>
 
-  <div class="actions row">
-    <input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book">
-  </div>
-</form>
+      <div class="field row">
+        <label for="book_opinion">Opinion</label>
+        <textarea class="col-xs-12 book_body" name="book[body]" id="book_body"></textarea>
+      </div>
 
-  </div>
+      <div class="actions row">
+        <input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book">
+      </div>
+    　</form>
+  　</div>
+
 
   <div class="col-xs-9">
     <h2>Users</h2>
@@ -77,23 +63,14 @@
       <tr>
         <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" alt="No image icon"></td>
         <td>test</td>
-        <td><a class="user_23296" href="/users/23296">Show</a></td>
+        <td><%= link_to @user.name, user_path(@user.id) %></td>
       </tr>
       <tr>
         <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" alt="No image icon"></td>
         <td>name</td>
         <td><a class="user_23255" href="/users/23255">Show</a></td>
       </tr>
-      <tr>
-        <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" alt="No image icon"></td>
-        <td>サンプルタロウ</td>
-        <td><a class="user_23237" href="/users/23237">Show</a></td>
-      </tr>
-      <tr>
-        <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" alt="No image icon"></td>
-        <td>テストジロウ</td>
-        <td><a class="user_23238" href="/users/23238">Show</a></td>
-      </tr>
+
   </tbody>
 </table>
 

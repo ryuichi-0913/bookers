@@ -4,7 +4,6 @@
 
 <% if @list.errors.any? %>
 <h3><%= @list.errors.count %> errors prohibited this book from being saved</h3>
-
     <ul>
       <% @list.errors.full_messages.each do |message| %>
         <li><%= message %></li>
