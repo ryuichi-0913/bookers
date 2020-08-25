@@ -5,6 +5,7 @@ class BooksController < ApplicationController
 
   def create
   	@list = Book.new(list_params)
+    @list.user_id = current_user.id
    if @list.save
  	# flash[:notice] = 'successfully create'
   	redirect_to book_path(@list), notice: 'successfully create'
