@@ -1,12 +1,71 @@
-<!-- サクセスメッセージ -->
-<p id="notice">
-	<%= notice %>
-</p>
+<body>
+        <!-- サクセスメッセージ -->
+        <p id="notice">
+          <%= notice %>
+        </p>
 
-<p><strong>title:</strong><%= @list.title %></p>
-<p><strong>body:</strong><%= @list.body %></p>
+  <div class="row">
+  <div class="col-xs-3">
+    <h2>User info</h2>
+     <%= attachment_image_tag @user, :image, size: '30x30',　format: 'jpeg', fallback: "no_image.jpg" %>
+        <table class="table">
+          <tbody><tr></tr>
+                 <tr>
+              	  <th>name</th>
+              	  <th><%= @user.name %></th>
+                 </tr>
+                 <tr>
+              	  <th>introduction</th>
+              	  <th><%= @user.introduction %></th>
+                </tr>
+          </tbody>
+        </table>
+      <div class="row">
+      	　<% if @user.id == current_user.id %>
+             <p><%= link_to "", edit_user_path(@user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user" %></p>
+            <% end %>
+      </div>
+<!-- ブック編集領域 -->
+    <h2>New book</h2>
+<!-- form_for部分 -->
+<%= form_for(@book) do |f| %>
+  <h4>タイトル</h4>
+  <%= f.text_field :title %>
+  <h4>本文</h4>
+  <%= f.text_area :body %>
+  
+  <%= f.submit 'Create book' %>
+<% end %>
+</div>
 
-<!-- 未定 -->
-<%=link_to "Edit",edit_book_path(@list) %>
-|
-<%=link_to "Back",books_path %>
+<!-- body右 -->
+<div class="col-xs-9">
+    <h2>Book detail</h2>
+
+    <table class="table">
+    <tbody>
+     <tr>
+        <td> <%= attachment_image_tag @user, :image, size: '30x30',　format: 'jpeg', fallback: "no_image.jpg" %><br><%=link_to "Back",books_path %></td>
+        <td><%= @book.title %></td>
+        <td><%= @book.body %></td>
+        <td><%=link_to "Edit",edit_book_path(@book) %></td>
+        <td><% if @user == current_user %>
+             <%= link_to "Destroy", users_path(@user), method: :delete %>
+             <% end %></td>
+      </tr>
+
+     </tbody>
+   </table>
+
+</div>
+<!-- フッター -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-9">
+          <p>CopyRight Infratop.inc</p>
+        </div>
+      </div>
+    </div>
+ </footer>
+</body>

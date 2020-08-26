@@ -7,9 +7,9 @@
 
 <!-- ユーザーインフォ領域 -->
     <h2>User info</h2>
-     <%= attachment_image_tag @user, :image, size: '30x30',　format: 'jpeg', fallback: "no_image.jpg" %>
+     <%= attachment_image_tag @use, :image, size: '30x30',　format: 'jpeg', fallback: "no_image.jpg" %>
         <table class="table">
-          <tbody><tr></tr> 
+          <tbody><tr></tr>
                  <tr>
                   <th>name</th>
                   <th><%= @user.name %></th>
@@ -27,29 +27,22 @@
       </div>
 <!-- ブック編集領域 -->
     <h2>New book</h2>
-      <form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="kdjtc3jSZSBZcUuae5lEf1FshNbVhgCM4mA5JRAeDcT1lJ82SvzIi1p4M9nteYivIPzpsgOJsb1OcuNgs38NKg==">
+<!-- form_for部分 -->
+<%= form_for(@book) do |f| %>
+  <h4>タイトル</h4>
+  <%= f.text_field :title %>
+  <h4>本文</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create book' %>
+<% end %>
 
-    <div class="field row">
-        <label for="book_title">Title</label>
-        <input class="col-xs-12 book_title" type="text" name="book[title]" id="book_title">
-      </div>
-
-      <div class="field row">
-        <label for="book_opinion">Opinion</label>
-        <textarea class="col-xs-12 book_body" name="book[body]" id="book_body"></textarea>
-      </div>
-
-      <div class="actions row">
-        <input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book">
-      </div>
-    　</form>
   　</div>
 
-
-  <div class="col-xs-9">
+<!-- BODY右部分 -->
+<div class="col-xs-9">
     <h2>Users</h2>
 
-    <table class="table">
+  <table class="table">
   <thead>
     <tr>
       <th>image</th>
@@ -58,39 +51,27 @@
     </tr>
   </thead>
 
-  <tbody>
-
-      <tr>
-        <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" alt="No image icon"></td>
-        <td>test</td>
-        <td><%= link_to @user.name, user_path(@user.id) %></td>
-      </tr>
-      <tr>
-        <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" alt="No image icon"></td>
-        <td>name</td>
-        <td><a class="user_23255" href="/users/23255">Show</a></td>
-      </tr>
-
-  </tbody>
-</table>
-
-  </div>
-
+    <tbody>
+        <tr>
+         <td>
+          <%= attachment_image_tag @user, :image, size: '30x30',　format: 'jpeg', fallback: "no_image.jpg" %>
+         </td>
+          <td><%= user.name%></td>
+          <td><%= link_to user.name, user_path(user.id) %></td>
+        </tr>
+    </tbody>
+　</table>
 </div>
       </div>
+</div>
+<!-- フッター -->
+  <footer>
+    <div class="container">
+    	<div class="row">
+      	<div class="col-xs-3 col-xs-offset-9">
+      		<p>CopyRight Infratop.inc</p>
+      	</div>
+      </div>
     </div>
-
-    <footer>
-  <div class="container">
-  	<div class="row">
-    	<div class="col-xs-3 col-xs-offset-9">
-    		<p>CopyRight Infratop.inc</p>
-    	</div>
-    </div>
-  </div>
-</footer>
-
-
-  
-
+ </footer>
 </body>

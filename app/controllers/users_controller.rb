@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   def show
+  @book = Book.new
    @user = User.find(params[:id]) # ここを記述
    @books = @user.books
   end
@@ -15,7 +17,16 @@ class UsersController < ApplicationController
   end
 
   def index
-    @user = User.find(1)
+    @book = Book.new
+    @user = current_user
+    @users = User.all
+    @use = User.find(params[:id])
+  end
+
+  def destroy
+   @user = User.find(params[:id])
+   @user.destroy
+   redirect_to users_path
   end
 
   private
